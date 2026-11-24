@@ -9,11 +9,20 @@ argument-hint: "<what you're building> [name] [folder]"
 
 Templates and `bin/scaffold.mjs` do every step that should come out the same each run. You pick the inputs, write the parts specific to this project, verify, and report.
 
+## Recipes
+
+Each recipe encodes one kind of repo DJ builds, modelled on a real one:
+
+| Recipe | Use for | Modelled on |
+|---|---|---|
+| `nextjs` | Marketing sites, landing pages, dev sites with docs | DJ's Next.js scaffolding prompt |
+| `fastapi` | Python APIs and backends: agents, services, app backends | grit-agents (stack) and grit-sdk (rules) |
+
 ## 1. Read the request
 
 Settle these from the request before doing anything:
 
-- **Recipe.** The `recipes/*.md` that fits: `nextjs` for sites, `fastapi` for Python APIs. If nothing fits, say so and stop.
+- **Recipe.** The one from the table above that fits. If the request could be either, ask which (step 2). If none fits, say so and stop.
 - **Name.** A slug of lowercase letters, digits and dashes. Take it from the request, else from the target folder.
 - **Target folder.** Use the one given. If none is given and the current folder is empty, use it. Otherwise ask (step 2).
 - **Layers.** Each recipe has a table of layers. Pick by the signals it lists, or by the answers to its questions.

@@ -8,6 +8,8 @@ DJ's opinionated skills for Claude Code, in the spirit of gstack and pstack. Rec
 |---|---|
 | `/dstack:scaffold` (`/scaffold` in Cursor) | Starts a project from a recipe, with conventions, lint rules and rule tests wired in. Runs only when typed. |
 | `/dstack:legibility` (`/legibility` in Cursor) | A developer experience (DX) assessment. It checks whether a developer can tell what a module does, and its main steps, from its exports and names alone, gives each file a verdict (Legible, Partly legible, Opaque), and proposes design patterns to fix it. Reports first and changes code only on request. Runs only when typed. |
+| `/dstack:staff-assessment` (`/staff-assessment` in Cursor) | Staff-level review against the "other devs will laugh at me" test: how a component works, which gates it fails (concurrency, idempotency, boundaries, control flow, async, errors, dependencies, ownership, scale), and the ranked fixes. Runs only when typed. |
+| `/dstack:escalate-design` (`/escalate-design` in Cursor) | Exactly three designs for the same job, each better than the last, ending at a staff architect merge: one branch at a typed boundary, then maps and methods. Design only, until you say implement. Runs only when typed. |
 | `typescript-conventions` | The TypeScript rules, including how logic files should read. The agent applies them when writing TypeScript. |
 | `nextjs-conventions` | The Next.js rules, built on the TypeScript ones. The agent applies them in Next.js projects. |
 | `python-conventions` | The Python rules, drawn from grit-sdk: classes own behaviour, one public class per module, one guarding `if` per function, parse at the edge. The agent applies them when writing Python. |
@@ -72,6 +74,8 @@ skills/python-conventions/       Python rules (from grit-sdk)
 skills/fastapi-conventions/      FastAPI rules, built on the Python ones (from grit-agents)
                                  Each recipe's rules are copied into the scaffolded project's
                                  AGENTS.md; its CLAUDE.md is one line, @AGENTS.md
+skills/staff-assessment/  how it works → laugh-test gates → ranked critical changes
+skills/escalate-design/   three options, each deleting more accidental control flow than the last
 skills/legibility/
   SKILL.md             DX assessment: map the target → state its job from the surface → find what blurs it → verdict and report
   references/patterns.md  the patterns a finding can point to, each with its signal and when to skip it

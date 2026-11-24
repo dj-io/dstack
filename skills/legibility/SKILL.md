@@ -80,4 +80,4 @@ The verdict comes from step 3:
 - **Partly legible:** the job is clear from the surface, but the steps aren't, or the body does more than the surface says.
 - **Opaque:** you can't state the job from the surface.
 
-End by asking whether to apply the proposed shape. Apply it only on a yes.
+End by asking whether to apply the proposed shape. Apply it only on a yes. If the main finding is control flow or a decision made twice, offer `/dstack:escalate-design` instead. If the code reads fine but you suspect correctness problems (concurrency, retries, errors), offer `/dstack:staff-assessment`.
