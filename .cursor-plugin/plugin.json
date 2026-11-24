@@ -1,0 +1,12 @@
+{
+  "name": "dstack",
+  "displayName": "dstack",
+  "version": "0.1.0",
+  "description": "DJ's opinionated skills for starting and building projects: recipes, conventions, and the lint rules that enforce them.",
+  "author": { "name": "dj" },
+  "repository": "https://github.com/dj-io/dstack",
+  "license": "MIT",
+  "keywords": ["scaffold", "nextjs", "stylex", "conventions", "fdd"],
+  "category": "developer-tools",
+  "skills": "./skills/"
+}

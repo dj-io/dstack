@@ -1,0 +1,10 @@
+# Copy to .env.local. SESSION_PASSWORD must be at least 32 characters: openssl rand -base64 32
+SESSION_PASSWORD=
+
+# Any OAuth 2.0 provider that supports the authorization code flow with PKCE.
+OAUTH_CLIENT_ID=
+OAUTH_CLIENT_SECRET=
+OAUTH_AUTHORIZE_URL=
+OAUTH_TOKEN_URL=
+OAUTH_USERINFO_URL=
+OAUTH_SCOPE=openid email profile

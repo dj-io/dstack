@@ -1,0 +1,11 @@
+{
+  "name": "dstack",
+  "owner": { "name": "dj" },
+  "plugins": [
+    {
+      "name": "dstack",
+      "source": "./",
+      "description": "DJ's opinionated skills for starting and building projects."
+    }
+  ]
+}
