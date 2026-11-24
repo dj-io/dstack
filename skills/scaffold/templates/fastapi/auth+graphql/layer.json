@@ -1,0 +1,6 @@
+{
+  "slots": {
+    "__GRAPHQL_IMPORTS__": ["from app.graphql.context import GraphqlContext"],
+    "__GRAPHQL_OPTIONS__": ["context_getter=GraphqlContext().build,"]
+  }
+}

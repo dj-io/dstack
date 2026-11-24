@@ -1,0 +1,7 @@
+{
+  "slots": {
+    "__DEPENDENCIES__": ["\"strawberry-graphql>=0.341.3\","],
+    "__IMPORTS__": ["from app.graphql.router import GraphqlRouter"],
+    "__ROUTERS__": ["GraphqlRouter(),"]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "slots": {
+    "__DEPENDENCIES__": ["\"pyjwt[crypto]>=2.15.1\",", "\"workos>=10.9.0\","],
+    "__ENV__": [
+      "",
+      "# WorkOS. The client ID is in the WorkOS dashboard. The app won't start without one.",
+      "WORKOS_CLIENT_ID=client_replace_me",
+      "WORKOS_API_KEY=",
+      "# The `iss` claim of your WorkOS access tokens (your custom auth domain, if you use one).",
+      "WORKOS_ISSUER=https://api.workos.com"
+    ]
+  }
+}

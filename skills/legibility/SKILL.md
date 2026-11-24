@@ -1,6 +1,6 @@
 ---
 name: legibility
-description: Staff-level developer experience (DX) assessment of TypeScript modules, scripts and APIs. Legibility here means whether a developer can tell what code does, and its main steps, from its exports, names and order alone, without reading the internals. Reports where intent is hidden or boundaries blur, and which design patterns would fix it. Use for /legibility or requests to assess, review or critique the API design, readability or DX of code.
+description: Staff-level developer experience (DX) assessment of TypeScript and Python modules, scripts and APIs. Legibility here means whether a developer can tell what code does, and its main steps, from its exports, names and order alone, without reading the internals. Reports where intent is hidden or boundaries blur, and which design patterns would fix it. Use for /legibility or requests to assess, review or critique the API design, readability or DX of code.
 disable-model-invocation: true
 argument-hint: "<file or folder>"
 ---
@@ -15,13 +15,18 @@ So the skill asks one question: can a developer tell what this file does, and ho
 
 ## 1. Load the standard
 
-Read `../typescript-conventions/rules.md` (relative to this skill's folder) in full. If the target is in a Next.js project, also read `../nextjs-conventions/rules.md`. Every finding cites the rule it breaks, or says plainly that no rule covers it yet.
+Read the conventions for the target's language in full, relative to this skill's folder:
+
+- TypeScript: `../typescript-conventions/rules.md`, plus `../nextjs-conventions/rules.md` in a Next.js project.
+- Python: `../python-conventions/rules.md`, plus `../fastapi-conventions/rules.md` in a FastAPI project. In Python, "the surface" is a module's public class and its public methods.
+
+Every finding cites the rule it breaks, or says plainly that no rule covers it yet.
 
 ## 2. Map the target
 
 - For a folder, start from its entry: the file other code imports, or the script that runs. Follow imports inward, but stay inside the target.
 - For each file, record its export, its private top-level helpers, its module-level constants and state, and what it imports.
-- If the project has the dstack lint rules (`eslint/rules/export-first.mjs` exists), run `pnpm lint` on the target and take its output as given. Spend your judgment on what lint can't see.
+- If the project has the dstack checks, run them and take their output as given: `pnpm lint` when `eslint/rules/export-first.mjs` exists, `make verify` when `tests/guards/` exists. Spend your judgment on what they can't see.
 
 ## 3. Work out the job from the outside
 

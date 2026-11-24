@@ -1,0 +1,57 @@
+[project]
+name = "__APP_NAME__"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "alembic>=1.20.1",
+    "asyncpg>=0.32.0",
+    "fastapi>=0.165.0",
+    "pydantic-settings>=2.16.3",
+    "sqlalchemy[asyncio]>=2.1.9",
+    "uvicorn[standard]>=0.54.0",
+    __DEPENDENCIES__
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "pytest-asyncio>=1.5.0",
+    "ruff>=0.17.6",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "RUF", "PTH", "T20", "ASYNC", "BLE", "C90", "PLR"]
+# SIM401 and RUF019 rewrite a known field read into dict.get, which the conventions forbid.
+# PLR2004 flags every literal; magic strings are handled by review, not lint.
+ignore = ["SIM401", "RUF019", "PLR2004"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pylint]
+max-args = 4
+max-statements = 20
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PLR0915"]
+"migrations/**" = ["PLR"]
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]
+exclude = ["^migrations/"]

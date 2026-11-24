@@ -1,0 +1,25 @@
+{
+  "requires": ["auth"],
+  "slots": {
+    "__DEPENDENCIES__": ["\"httpx>=0.28.1\",", "\"stripe>=17.1.0\","],
+    "__IMPORTS__": [
+      "from app.billing.router import BillingRouter",
+      "from app.core.auth.current_user import CurrentUser"
+    ],
+    "__WIRING__": ["current_user = CurrentUser()"],
+    "__ROUTERS__": ["BillingRouter(database=database, current_user=current_user),"],
+    "__MODEL_IMPORTS__": [
+      "import app.billing.customer_table  # noqa: F401",
+      "import app.billing.webhook.event_table  # noqa: F401"
+    ],
+    "__ENV__": [
+      "",
+      "# Stripe. Keys are in the Stripe dashboard; the webhook secret comes from `stripe listen` locally.",
+      "STRIPE_SECRET_KEY=",
+      "STRIPE_WEBHOOK_SECRET=",
+      "STRIPE_PRICE_ID=",
+      "STRIPE_SUCCESS_URL=http://localhost:3000/billing/success",
+      "STRIPE_CANCEL_URL=http://localhost:3000/billing"
+    ]
+  }
+}

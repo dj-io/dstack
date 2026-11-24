@@ -1,0 +1,9 @@
+# Copy to .env. docker compose reads it, and so does Settings when you run outside Docker.
+
+# Host ports, so several projects can run side by side.
+DB_PORT=5432
+API_PORT=8000
+
+DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/app
+CORS_ORIGINS=["http://localhost:3000"]
+__ENV__
