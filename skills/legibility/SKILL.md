@@ -1,13 +1,17 @@
 ---
-name: assess-logic-dx
-description: Staff-level assessment of how readable a TypeScript logic file or folder is for developers. Checks whether its work can be understood from its exports and names, where boundaries blur, and which design patterns would fix it. Use for /assess-logic-dx or requests to assess, review or critique the API design or DX of logic files.
+name: legibility
+description: Staff-level developer experience (DX) assessment of TypeScript modules, scripts and APIs. Legibility here means whether a developer can tell what code does, and its main steps, from its exports, names and order alone, without reading the internals. Reports where intent is hidden or boundaries blur, and which design patterns would fix it. Use for /legibility or requests to assess, review or critique the API design, readability or DX of code.
 disable-model-invocation: true
 argument-hint: "<file or folder>"
 ---
 
-# Assess logic DX
+# Legibility: a DX assessment
 
-Judge one question: can a developer who opens this file tell what it does, and its main steps, without reading the helpers? Report what blocks that and the design that would fix it. Don't edit code unless the user asks after reading the report.
+This skill assesses developer experience (DX): what it costs a developer to understand code they didn't write. It does not assess runtime behaviour, performance or correctness.
+
+**Legibility** is the property it checks. A file is legible when a developer who opens it can tell what it does, and its main steps, from the surface alone: the export, its signature and JSDoc, the names, and the order things appear in. A file that follows every structural rule (small files, one export) can still fail this, if its intent is buried in private helpers, loose constants and unnamed steps.
+
+So the skill asks one question: can a developer tell what this file does, and how, without reading the helpers? Report what blocks that and the design that would fix it. Don't edit code unless the user asks after reading the report.
 
 ## 1. Load the standard
 
@@ -51,6 +55,7 @@ Use this shape, ranking files and findings by how much they slow a reader down:
 
 ```
 ## <path>
+Verdict: <Legible | Partly legible | Opaque>
 Job (from the surface): <one sentence, or "can't tell">
 Steps (from the surface): <list, or "can't tell">
 
@@ -63,5 +68,11 @@ Proposed shape
 Encode
 - <findings that should become a lint rule or a rules.md line, so the next assessment doesn't need to repeat them>
 ```
+
+The verdict comes from step 3:
+
+- **Legible:** the job and the steps are both clear from the surface, and the body matches them.
+- **Partly legible:** the job is clear from the surface, but the steps aren't, or the body does more than the surface says.
+- **Opaque:** you can't state the job from the surface.
 
 End by asking whether to apply the proposed shape. Apply it only on a yes.

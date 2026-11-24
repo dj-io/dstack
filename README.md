@@ -7,7 +7,7 @@ DJ's opinionated skills for Claude Code, in the spirit of gstack and pstack. Rec
 | Skill | What it does |
 |---|---|
 | `/dstack:scaffold` (`/scaffold` in Cursor) | Starts a project from a recipe, with conventions, lint rules and rule tests wired in. Runs only when typed. |
-| `/dstack:assess-logic-dx` (`/assess-logic-dx` in Cursor) | Staff-level assessment of whether logic files can be understood from their exports and names, with design patterns to fix them. Reports first and changes code only on request. Runs only when typed. |
+| `/dstack:legibility` (`/legibility` in Cursor) | A developer experience (DX) assessment. It checks whether a developer can tell what a module does, and its main steps, from its exports and names alone, gives each file a verdict (Legible, Partly legible, Opaque), and proposes design patterns to fix it. Reports first and changes code only on request. Runs only when typed. |
 | `typescript-conventions` | The TypeScript rules, including how logic files should read. The agent applies them when writing TypeScript. |
 | `nextjs-conventions` | The Next.js rules, built on the TypeScript ones. The agent applies them in Next.js projects. |
 
@@ -67,8 +67,8 @@ skills/nextjs-conventions/
   rules.md             Next.js rules, built on the TypeScript ones. Both files are copied into
                        each scaffolded project's AGENTS.md (its CLAUDE.md is one line,
                        @AGENTS.md, so both tools read the same file)
-skills/assess-logic-dx/
-  SKILL.md             map the target → state its job from the surface → find what blurs it → report
+skills/legibility/
+  SKILL.md             DX assessment: map the target → state its job from the surface → find what blurs it → verdict and report
   references/patterns.md  the patterns a finding can point to, each with its signal and when to skip it
 ```
 

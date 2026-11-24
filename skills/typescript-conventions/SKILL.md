@@ -7,6 +7,6 @@ description: DJ's TypeScript code conventions. Covers one export per file, no ba
 
 Read `rules.md` in this folder in full before writing code.
 
-Projects scaffolded by dstack carry the same rules in their `AGENTS.md`, along with lint rules and rule tests that enforce the ones marked **(lint)**. Run `pnpm lint` after each change rather than checking those rules by eye. To assess existing code against these rules, the user can run `/dstack:assess-logic-dx`.
+Projects scaffolded by dstack carry the same rules in their `AGENTS.md`, along with lint rules and rule tests that enforce the ones marked **(lint)**. Run `pnpm lint` after each change rather than checking those rules by eye. To assess the legibility (DX) of existing code against these rules, the user can run `/dstack:legibility`.
 
 When a project's code and these rules disagree, follow the rules for new code. Leave a refactor of the old code to the user's call.
