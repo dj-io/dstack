@@ -31,7 +31,7 @@ Ask one question at a time with the harness's question tool (AskUserQuestion in 
 
 ## 3. Run the recipe
 
-Read `recipes/<recipe>.md` in full and follow it. For each chosen layer, read `layers/<recipe>-<layer>.md` in full. Read the `<recipe>-conventions` skill before writing any code.
+Read `recipes/<recipe>.md` in full and follow it. For each chosen layer, read `layers/<recipe>-<layer>.md` in full. Before writing any code, read the conventions skills listed in `templates/<recipe>/conventions.json`, in order.
 
 ## 4. Verify
 

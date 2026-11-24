@@ -7,7 +7,9 @@ DJ's opinionated skills for Claude Code, in the spirit of gstack and pstack. Rec
 | Skill | What it does |
 |---|---|
 | `/dstack:scaffold` (`/scaffold` in Cursor) | Starts a project from a recipe, with conventions, lint rules and rule tests wired in. Runs only when typed. |
-| `nextjs-conventions` | The Next.js code rules. Claude applies it when writing code in a Next.js project. |
+| `/dstack:assess-logic-dx` (`/assess-logic-dx` in Cursor) | Staff-level assessment of whether logic files can be understood from their exports and names, with design patterns to fix them. Reports first and changes code only on request. Runs only when typed. |
+| `typescript-conventions` | The TypeScript rules, including how logic files should read. The agent applies them when writing TypeScript. |
+| `nextjs-conventions` | The Next.js rules, built on the TypeScript ones. The agent applies them in Next.js projects. |
 
 ### Recipes
 
@@ -56,11 +58,18 @@ skills/scaffold/
   SKILL.md             entry point: read request → ask at real forks → recipe → verify → present
   recipes/<recipe>.md  stack, layer table, steps, known constraints
   layers/              one file per optional layer
-  templates/<recipe>/  base/ plus one folder per layer (layer.json merges dependencies)
+  templates/<recipe>/  base/, one folder per layer (layer.json merges dependencies), and
+                       conventions.json listing which conventions skills go into AGENTS.md
   bin/scaffold.mjs     copies templates, merges layers, fills names, writes AGENTS.md and dstack.json
+skills/typescript-conventions/
+  rules.md             TypeScript rules, including logic files
 skills/nextjs-conventions/
-  rules.md             the conventions, copied into each scaffolded project's AGENTS.md
-                       (its CLAUDE.md is one line, @AGENTS.md, so both tools read the same file)
+  rules.md             Next.js rules, built on the TypeScript ones. Both files are copied into
+                       each scaffolded project's AGENTS.md (its CLAUDE.md is one line,
+                       @AGENTS.md, so both tools read the same file)
+skills/assess-logic-dx/
+  SKILL.md             map the target → state its job from the surface → find what blurs it → report
+  references/patterns.md  the patterns a finding can point to, each with its signal and when to skip it
 ```
 
 ## Personal defaults
@@ -70,5 +79,5 @@ skills/nextjs-conventions/
 ## Adding a recipe
 
 1. Add `skills/scaffold/templates/<recipe>/base/` (and any layer folders), then `recipes/<recipe>.md`.
-2. Add `skills/<recipe>-conventions/rules.md` if the recipe has its own conventions.
+2. Add `skills/<recipe>-conventions/rules.md` if the recipe has its own conventions, and list the conventions skills it uses, in order, in `templates/<recipe>/conventions.json`.
 3. Scaffold a test project and get its verify command passing before committing.

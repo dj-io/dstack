@@ -31,8 +31,24 @@ export default defineConfig([
     rules: {
       'dstack/one-export-per-file': 'error',
       'dstack/module-comments-jsdoc': 'error',
+      'dstack/export-first': 'error',
+      'dstack/max-module-helpers': ['error', { max: 3 }],
       'no-barrel-files/no-barrel-files': 'error',
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: ':matches(Program, Program > ExportNamedDeclaration) > VariableDeclaration[kind=/^(let|var)$/]',
+          message: 'No module-level mutable state. Pass the value in, or keep it inside the function that owns it.',
+        },
+      ],
+      'max-params': ['error', 3],
+      'max-lines-per-function': ['error', { max: 50, skipBlankLines: true, skipComments: true }],
+      complexity: ['error', 10],
     },
+  },
+  {
+    files: ['tests/**'],
+    rules: { 'max-lines-per-function': 'off' },
   },
   {
     files: [NEXT_CONVENTION_FILES],

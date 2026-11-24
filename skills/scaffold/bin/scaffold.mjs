@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * Copies a recipe's base template plus any layers into a new project folder,
- * fills in the name, and copies the recipe's conventions into AGENTS.md.
+ * fills in the name, and copies the conventions skills listed in the recipe's
+ * conventions.json into AGENTS.md, in order.
  * Everything that should come out the same on every run happens here, so the
  * agent only writes what is specific to the project.
  *
@@ -40,7 +41,10 @@ const recipeDir = path.join(SKILL_DIR, 'templates', recipe);
 
 if (!existsSync(path.join(recipeDir, 'base'))) fail(`no templates for recipe "${recipe}"`);
 for (const layer of layers) {
-  if (!existsSync(path.join(recipeDir, layer))) fail(`recipe "${recipe}" has no layer "${layer}"`);
+  const layerDir = path.join(recipeDir, layer);
+  if (layer === 'base' || !existsSync(layerDir) || !statSync(layerDir).isDirectory()) {
+    fail(`recipe "${recipe}" has no layer "${layer}"`);
+  }
 }
 if (existsSync(target) && readdirSync(target).length > 0) fail(`${target} exists and is not empty`);
 
@@ -86,8 +90,15 @@ for (const [from, to] of Object.entries(RENAMES)) {
   if (existsSync(path.join(target, from))) renameSync(path.join(target, from), path.join(target, to));
 }
 
-const conventionsPath = path.join(SKILLS_ROOT, `${recipe}-conventions`, 'rules.md');
-const conventions = existsSync(conventionsPath) ? readFileSync(conventionsPath, 'utf8').trim() : '';
+const conventionsListPath = path.join(recipeDir, 'conventions.json');
+const conventionSkills = existsSync(conventionsListPath) ? JSON.parse(readFileSync(conventionsListPath, 'utf8')) : [];
+const conventions = conventionSkills
+  .map((skill) => {
+    const rulesPath = path.join(SKILLS_ROOT, skill, 'rules.md');
+    if (!existsSync(rulesPath)) fail(`conventions.json names "${skill}", but ${rulesPath} does not exist`);
+    return readFileSync(rulesPath, 'utf8').trim();
+  })
+  .join('\n\n');
 
 for (const file of listFiles(target)) {
   if (!TEXT_EXTENSIONS.has(path.extname(file))) continue;

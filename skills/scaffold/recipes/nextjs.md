@@ -37,9 +37,11 @@ A marketing or landing site with neither signal gets the base only.
 src/app/          routes only; each renders one feature entry component
 src/landing/      the landing feature: Landing → Hero → HeroCopy, HeroActions
 src/primitives/   Button (Base UI), ButtonLink, Stack, Heading, Text, tokens (*.stylex.ts)
-eslint/           local rules: one-export-per-file, max-raw-elements, module-comments-jsdoc
+eslint/           local rules: one-export-per-file, export-first, max-module-helpers,
+                  max-raw-elements, module-comments-jsdoc. eslint.config.mjs also turns on
+                  no module-level let, max-params 3, max-lines-per-function 50, complexity 10
 tests/rules/      one test per enforced rule, linting samples through the real config
-AGENTS.md         the conventions, copied from the nextjs-conventions skill (Cursor reads it)
+AGENTS.md         typescript-conventions + nextjs-conventions (per conventions.json); Cursor reads it
 CLAUDE.md         one line, @AGENTS.md, so Claude Code reads the same file
 dstack.json       recipe and layers used, for later dstack skills
 ```
